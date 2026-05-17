@@ -16,33 +16,44 @@ const BikeList = () => {
       }
     };
     fetchBikes();
-  }, []); // Keeps it fetching strictly once
+  }, []);
 
   return (
-    <div style={{ padding: '20px', minHeight: '400px' }}>
-      <h2 style={{ borderBottom: '2px solid #34495e', paddingBottom: '10px', color: '#2c3e50', textAlign: 'center' }}>
+    <div style={{ padding: '20px' }}>
+      <h2 style={{ 
+        fontSize: '1.5rem', 
+        color: '#f1f5f9', 
+        marginBottom: '30px', 
+        borderLeft: '4px solid #38bdf8', 
+        paddingLeft: '15px' 
+      }}>
         Available Showroom Fleet
       </h2>
       
-      {error && <p style={{ color: 'red', fontWeight: 'bold', textAlign: 'center' }}>{error}</p>}
+      {error && (
+        <p style={{ color: '#ef4444', fontWeight: 'bold', textAlign: 'center', backgroundColor: '#451a03', padding: '15px', borderRadius: '8px' }}>
+          {error}
+        </p>
+      )}
       
-      {/* Fixed layout grid container that prevents moving components */}
+      {/* Responsive Grid Container */}
       <div style={{ 
-        display: 'flex', 
-        flexWrap: 'wrap', 
-        justifyContent: 'center', 
-        alignItems: 'center',
-        gap: '20px',
-        marginTop: '30px',
-        width: '100%'
+        display: 'grid', 
+        gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', 
+        gap: '30px',
+        justifyContent: 'center'
       }}>
         {bikes.length === 0 && !error ? (
-          <div style={{ padding: '40px', backgroundColor: '#f8f9fa', borderRadius: '8px', border: '1px dashed #ccc', textAlign: 'center', width: '100%', maxWidth: '500px' }}>
-            <p style={{ color: '#2c3e50', margin: '0 0 10px 0', fontWeight: 'bold' }}>
-              🏪 Showroom Currently Empty
-            </p>
-            <p style={{ color: '#7f8c8d', margin: '0', fontSize: '0.9em' }}>
-              Use Thunder Client to POST a bike to your backend API!
+          <div style={{ 
+            gridColumn: '1 / -1', 
+            padding: '5px0px', 
+            backgroundColor: '#1e293b', 
+            borderRadius: '12px', 
+            border: '2px dashed #475569', 
+            textAlign: 'center' 
+          }}>
+            <p style={{ color: '#94a3b8', fontSize: '1.1rem' }}>
+              Showroom is currently empty. Use Thunder Client to add your superbikes!
             </p>
           </div>
         ) : (

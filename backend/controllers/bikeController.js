@@ -1,6 +1,8 @@
 import Bike from '../models/Bike.js';
 
-// Get all bikes -> GET /api/bikes
+// @desc    Get all showroom bikes
+// @route   GET /api/bikes
+// @access  Public
 export const getBikes = async (req, res) => {
   try {
     const bikes = await Bike.find({});
@@ -10,11 +12,21 @@ export const getBikes = async (req, res) => {
   }
 };
 
-// Create a bike entry -> POST /api/bikes
+// @desc    Create a new bike entry
+// @route   POST /api/bikes
+// @access  Public
 export const createBike = async (req, res) => {
   try {
-    const { name, type, pricePerDay } = req.body;
-    const newBike = new Bike({ name, type, pricePerDay });
+    const { name, type, pricePerDay, isAvailable } = req.body;
+
+    // Build the bike entry using all passed data fields from Thunder Client
+    const newBike = new Bike({
+      name,
+      type,
+      pricePerDay,
+      isAvailable // Captures true or false seamlessly
+    });
+
     const savedBike = await newBike.save();
     res.status(201).json(savedBike);
   } catch (error) {
